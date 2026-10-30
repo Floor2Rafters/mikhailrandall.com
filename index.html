@@ -30,6 +30,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);-webkit-fon
 a{color:inherit}
 :focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:4px}
 
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* top bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
@@ -58,7 +59,7 @@ p{max-width:65ch}
 .slide .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 55%)}
 .slide .ph b{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.65;text-align:center}
 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,11,21,.15) 30%,rgba(6,11,21,.82));pointer-events:none}
-.over{position:absolute;left:0;right:0;bottom:0;padding-block:28px 26px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.over{z-index:2;position:absolute;left:0;right:0;bottom:0;padding-block:28px 26px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;justify-content:flex-end;align-items:flex-end;gap:16px;flex-wrap:wrap}
 .who{min-width:0}
 .who .eyebrow{color:#E2C46A}
 .who h1{color:var(--on-stage);font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(38px,9vw,92px);line-height:.92;margin-top:10px}
@@ -66,7 +67,7 @@ p{max-width:65ch}
 .ctl{display:flex;gap:8px;align-items:center}
 .ctl button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,241,234,.35);background:rgba(6,11,21,.35);color:var(--on-stage);font:600 16px/1 var(--body);cursor:pointer}
 .ctl button:hover{background:rgba(243,241,234,.15)}
-.dots{position:absolute;top:16px;right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:6px}
+.dots{z-index:2;position:absolute;top:16px;right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:6px}
 .dots i{width:22px;height:3px;border-radius:2px;background:rgba(243,241,234,.3)}
 .dots i.on{background:#E2C46A}
 .home-note{max-width:1100px;margin:0 auto;padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));color:var(--ink);font:500 18px/1.4 var(--body)}
@@ -110,13 +111,8 @@ footer div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16p
 <section id="v-home" data-view="home">
   <div class="stage" id="stage" aria-roledescription="carousel" aria-label="My people">
     <div class="dots" id="dots"></div>
-    <div class="shade"></div>
+    <h1 class="sr">Mikhail Randall</h1>
     <div class="over">
-      <div class="who">
-        <div class="eyebrow">Indianapolis, Indiana</div>
-        <h1>Mikhail<br>Randall</h1>
-        <div class="cap" id="cap" aria-live="polite"></div>
-      </div>
       <div class="ctl">
         <button type="button" id="prev" aria-label="Previous photo">‹</button>
         <button type="button" id="play" aria-label="Pause slideshow">❚❚</button>
@@ -166,18 +162,18 @@ const PLACEHOLDERS=[
   {g:"linear-gradient(135deg,#243B2E,#0B1424)",cap:"Photo 3 · and the next"}
 ];
 const slides=PHOTOS.length?PHOTOS:PLACEHOLDERS;
-const stage=document.getElementById('stage'), dots=document.getElementById('dots'), cap=document.getElementById('cap');
+const stage=document.getElementById('stage'), dots=document.getElementById('dots'), cap=null;
 slides.forEach((s,i)=>{
   const d=document.createElement('div'); d.className='slide'+(i?'':' on'); d.setAttribute('aria-roledescription','slide');
   if(s.src){ const im=new Image(); im.src=s.src; im.alt=s.cap||''; im.loading=i?'lazy':'eager'; d.appendChild(im); }
   else { const p=document.createElement('div'); p.className='ph'; p.style.setProperty('--g',s.g); const b=document.createElement('b'); b.textContent='Example slide'; p.appendChild(b); d.appendChild(p); }
-  stage.insertBefore(d,stage.querySelector('.shade'));
+  stage.insertBefore(d,stage.querySelector('.over'));
   dots.appendChild(document.createElement('i'));
 });
 let cur=0, timer=null, playing=!matchMedia('(prefers-reduced-motion: reduce)').matches;
 function show(n){ const els=stage.querySelectorAll('.slide'); cur=(n+els.length)%els.length;
   els.forEach((e,i)=>e.classList.toggle('on',i===cur)); dots.querySelectorAll('i').forEach((e,i)=>e.classList.toggle('on',i===cur));
-  cap.textContent=slides[cur].cap||''; }
+  }
 function tick(){ clearInterval(timer); if(playing) timer=setInterval(()=>show(cur+1),5000);
   const b=document.getElementById('play'); b.textContent=playing?'❚❚':'▶'; b.setAttribute('aria-label',playing?'Pause slideshow':'Play slideshow'); }
 document.getElementById('prev').onclick=()=>{ show(cur-1); tick(); };
