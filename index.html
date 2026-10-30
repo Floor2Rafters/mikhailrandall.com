@@ -64,7 +64,6 @@ p{max-width:65ch}
 .slide.on{opacity:1}
 .slide img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
 .slide img.fill{object-fit:cover;filter:blur(28px) brightness(.45) saturate(1.1);transform:scale(1.15)}
-@media (max-width:700px){.stage{height:auto;min-height:0;aspect-ratio:3/2}.slide img{object-fit:cover}.slide img.fill{display:none}}
 .slide .ph{position:absolute;inset:0;background:var(--g)}
 .slide .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 55%)}
 .slide .ph b{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.65;text-align:center}
@@ -75,7 +74,7 @@ p{max-width:65ch}
 .who h1{color:var(--on-stage);font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(38px,9vw,92px);line-height:.92;margin-top:10px}
 .cap{margin-top:12px;font-size:15px;color:rgba(243,241,234,.86);min-height:1.6em}
 .ctl{display:flex;gap:8px;align-items:center}
-@media (hover:none){.ctl{display:none}}
+
 .ctl button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,241,234,.35);background:rgba(6,11,21,.35);color:var(--on-stage);font:600 16px/1 var(--body);cursor:pointer}
 .ctl button:hover{background:rgba(243,241,234,.15)}
 .dots{z-index:2;position:absolute;top:12px;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:flex-end;gap:4px}
@@ -107,6 +106,9 @@ footer div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16p
 footer .mail{color:var(--blue);text-decoration:none}
 footer .mail:hover{text-decoration:underline}
 @media (prefers-reduced-motion:reduce){.slide{transition:none}}
+/* Phone: full-width photo, arrows centered underneath */
+@media (max-width:700px){.stage{height:auto;min-height:0;aspect-ratio:3/2;overflow:visible;margin-bottom:68px}.slide img{object-fit:cover}.slide img.fill{display:none}
+.over{top:100%;bottom:auto;padding-block:12px;justify-content:center}.ctl button{background:var(--surface);border-color:var(--line)}}
 </style>
 
 </head>
