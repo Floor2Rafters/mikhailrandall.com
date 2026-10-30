@@ -106,9 +106,9 @@ footer div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16p
 footer .mail{color:var(--blue);text-decoration:none}
 footer .mail:hover{text-decoration:underline}
 @media (prefers-reduced-motion:reduce){.slide{transition:none}}
-/* Music tab */
-.page.music{max-width:900px;padding-block:20px 24px}
-.spot{display:block;width:100%;height:calc(100vh - var(--chrome,120px) - 44px);height:calc(100svh - var(--chrome,120px) - 44px);min-height:380px;border:0;border-radius:14px;background:var(--surface)}
+/* Music under the slideshow */
+.music{max-width:900px;margin:0 auto;padding-block:20px 8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.spot{display:block;width:100%;height:352px;border:0;border-radius:14px;background:var(--surface)}
 /* Phone: full-width photo, arrows centered underneath */
 @media (max-width:700px){.stage{height:auto;min-height:0;aspect-ratio:3/2;overflow:visible;margin-bottom:68px}.slide img{object-fit:cover}.slide img.fill{display:none}
 .over{top:100%;bottom:auto;padding-block:12px;justify-content:center}.ctl button{background:var(--surface);border-color:var(--line)}}
@@ -120,7 +120,6 @@ footer .mail:hover{text-decoration:underline}
   <a class="mark" href="#home">Mikhail <span>Randall</span></a>
   <nav aria-label="Site">
     <a href="#home" data-tab="home">Home</a>
-    <a href="#music" data-tab="music">Music</a>
     <a href="#day2day" data-tab="day2day">Day2Day<svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="locked" role="img"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></a>
   </nav>
 </div></header>
@@ -137,14 +136,12 @@ footer .mail:hover{text-decoration:underline}
       </div>
     </div>
   </div>
+  <div class="music">
+    <iframe class="spot" title="My top songs on Spotify" src="https://open.spotify.com/embed/playlist/25h322PWUEkBvWgHeMemTK?utm_source=generator&amp;theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
 </section>
 
 
-
-<section id="v-music" data-view="music" class="page music" hidden>
-  <h1 class="sr">Music</h1>
-  <iframe class="spot" title="My top songs on Spotify" src="https://open.spotify.com/embed/playlist/25h322PWUEkBvWgHeMemTK?utm_source=generator&amp;theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-</section>
 
 <section id="v-day2day" data-view="day2day" class="page" hidden>
   <div class="eyebrow">Private</div>
@@ -215,7 +212,7 @@ show(0); tick();
 function chrome(){ const h=document.querySelector('.bar'), f=document.querySelector('footer'); document.documentElement.style.setProperty('--chrome',((h?h.offsetHeight:0)+(f?f.offsetHeight:0))+'px'); }
 addEventListener('resize',chrome); chrome();
 /* Tabs */
-const TABS=['home','music','day2day'];
+const TABS=['home','day2day'];
 function route(){ const t=TABS.includes(location.hash.slice(1))?location.hash.slice(1):'home';
   document.querySelectorAll('[data-view]').forEach(v=>v.hidden=v.dataset.view!==t);
   document.querySelectorAll('nav a').forEach(a=>{ if(a.dataset.tab===t) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
