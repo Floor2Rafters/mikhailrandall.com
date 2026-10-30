@@ -102,7 +102,6 @@ footer div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16p
   <a class="mark" href="#home">Mikhail <span>Randall</span></a>
   <nav aria-label="Site">
     <a href="#home" data-tab="home">Home</a>
-    <a href="#resume" data-tab="resume">Resume</a>
     <a href="#day2day" data-tab="day2day" class="lock">Day2Day</a>
   </nav>
 </div></header>
@@ -124,19 +123,6 @@ footer div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16p
 </section>
 
 
-<section id="v-resume" data-view="resume" class="page" hidden>
-  <div class="eyebrow">Resume</div>
-  <h1>Service record</h1>
-  <p class="lede">Leading people since 2013.</p>
-  <div class="rec">
-    <div class="row"><div class="when">OCT 2026 – NOW</div><h3>Assistant Manager</h3><div class="org">Upland Brewing Co. · Fountain Square, Indianapolis</div></div>
-    <div class="row"><div class="when"><span class="todo">[start]</span> – OCT 2026</div><h3>General Manager</h3><div class="org">Sangrita Grill + Cantina · Fishers, IN</div><p>Ran a full-service, sit-down restaurant with a team of 25 to 50 people.</p></div>
-    <div class="row"><div class="when">OCT 2026</div><h3>Founder</h3><div class="org">Randall Holdings LLC</div></div>
-    <div class="row"><div class="when">2013 – 2019</div><h3>11B Infantryman, E-3</h3><div class="org">Army National Guard</div></div>
-    <div class="row"><div class="when">2014 – 2016</div><h3>Entrepreneurship coursework</h3><div class="org">Ivy Tech Community College</div></div>
-    <div class="row"><div class="when">2013</div><h3>Graduate</h3><div class="org">Ben Davis High School</div></div>
-  </div>
-</section>
 
 <section id="v-day2day" data-view="day2day" class="page" hidden>
   <div class="eyebrow">Private</div>
@@ -184,7 +170,7 @@ stage.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTo
 show(0); tick();
 
 /* Tabs */
-const TABS=['home','resume','day2day'];
+const TABS=['home','day2day'];
 function route(){ const t=TABS.includes(location.hash.slice(1))?location.hash.slice(1):'home';
   document.querySelectorAll('[data-view]').forEach(v=>v.hidden=v.dataset.view!==t);
   document.querySelectorAll('nav a').forEach(a=>{ if(a.dataset.tab===t) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
