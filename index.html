@@ -8,6 +8,13 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
 <meta name="theme-color" content="#07080F">
+<meta property="og:title" content="Mikhail Randall">
+<meta property="og:url" content="https://mikhailrandall.com/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://mikhailrandall.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <style>:root{color-scheme:dark;background:#07080F;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Mikhail Randall</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -33,13 +40,15 @@ a{color:inherit}
 /* top bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
-.bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.mark{font:800 24px/1 var(--display);letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
+.bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:nowrap;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mark{white-space:nowrap;font:800 clamp(19px,5.6vw,26px)/1 var(--display);letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
 .mark span{color:var(--brass)}
-nav{display:flex;gap:4px;flex-wrap:wrap}
-nav a{font:700 16px/1 var(--display);text-transform:uppercase;letter-spacing:.04em;text-decoration:none;color:var(--muted);padding:9px 12px;border-radius:999px}
+nav{display:flex;gap:2px;flex-wrap:nowrap}
+nav a{font:700 16px/1 var(--display);text-transform:uppercase;letter-spacing:.04em;text-decoration:none;color:var(--muted);padding:9px 12px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+@media (max-width:420px){.bar-in{gap:8px}.mark{font-size:19px}nav a{font-size:13px;padding:7px 8px}}
+.mark{min-width:0;overflow:hidden;text-overflow:clip}
 nav a[aria-current="page"]{color:var(--ink);background:var(--tint);box-shadow:inset 0 0 0 1px var(--brass)}
-nav a.lock::after{content:" 🔒";font-size:11px}
+nav a .lk{width:12px;height:12px;color:var(--brass);flex:none}
 
 .page{max-width:760px;margin:0 auto;padding-block:48px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
@@ -50,10 +59,11 @@ h2{font-weight:800;font-size:22px;margin-top:40px}
 p{max-width:65ch}
 
 /* HOME: slideshow */
-.stage{position:relative;background:var(--stage);color:var(--on-stage);width:100%;aspect-ratio:3/2;max-height:82vh;overflow:hidden;display:grid}
+.stage{position:relative;background:var(--stage);color:var(--on-stage);width:100%;height:calc(100vh - var(--chrome,120px));height:calc(100svh - var(--chrome,120px));min-height:320px;overflow:hidden;display:grid}
 .slide{grid-area:1/1;position:relative;opacity:0;transition:opacity 1.2s ease;display:grid;place-items:center}
 .slide.on{opacity:1}
-.slide img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.slide img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.slide img.fill{object-fit:cover;filter:blur(28px) brightness(.45) saturate(1.1);transform:scale(1.15)}
 .slide .ph{position:absolute;inset:0;background:var(--g)}
 .slide .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 55%)}
 .slide .ph b{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.65;text-align:center}
@@ -64,6 +74,7 @@ p{max-width:65ch}
 .who h1{color:var(--on-stage);font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(38px,9vw,92px);line-height:.92;margin-top:10px}
 .cap{margin-top:12px;font-size:15px;color:rgba(243,241,234,.86);min-height:1.6em}
 .ctl{display:flex;gap:8px;align-items:center}
+@media (hover:none){.ctl{display:none}}
 .ctl button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,241,234,.35);background:rgba(6,11,21,.35);color:var(--on-stage);font:600 16px/1 var(--body);cursor:pointer}
 .ctl button:hover{background:rgba(243,241,234,.15)}
 .dots{z-index:2;position:absolute;top:12px;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:flex-end;gap:4px}
@@ -103,7 +114,7 @@ footer .mail:hover{text-decoration:underline}
   <a class="mark" href="#home">Mikhail <span>Randall</span></a>
   <nav aria-label="Site">
     <a href="#home" data-tab="home">Home</a>
-    <a href="#day2day" data-tab="day2day" class="lock">Day2Day</a>
+    <a href="#day2day" data-tab="day2day">Day2Day<svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-label="locked" role="img"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></a>
   </nav>
 </div></header>
 
@@ -170,7 +181,8 @@ const slides=PHOTOS.length?PHOTOS:PLACEHOLDERS;
 const stage=document.getElementById('stage'), dots=document.getElementById('dots'), cap=null;
 slides.forEach((s,i)=>{
   const d=document.createElement('div'); d.className='slide'+(i?'':' on'); d.setAttribute('aria-roledescription','slide');
-  if(s.src){ const im=new Image(); im.src=s.src; im.alt=s.alt||''; im.loading=i?'lazy':'eager'; d.appendChild(im); }
+  if(s.src){ const bg=new Image(); bg.src=s.src; bg.alt=''; bg.className='fill'; bg.setAttribute('aria-hidden','true'); bg.loading=i?'lazy':'eager'; d.appendChild(bg);
+    const im=new Image(); im.src=s.src; im.alt=s.alt||''; im.loading=i?'lazy':'eager'; d.appendChild(im); }
   else { const p=document.createElement('div'); p.className='ph'; p.style.setProperty('--g',s.g); const b=document.createElement('b'); b.textContent='Example slide'; p.appendChild(b); d.appendChild(p); }
   stage.insertBefore(d,stage.querySelector('.over'));
   dots.appendChild(document.createElement('i'));
@@ -187,6 +199,9 @@ let sx=null; stage.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; }
 stage.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){ show(cur+(dx<0?1:-1)); tick(); } sx=null; });
 show(0); tick();
 
+/* Stage fills the screen between header and footer */
+function chrome(){ const h=document.querySelector('.bar'), f=document.querySelector('footer'); document.documentElement.style.setProperty('--chrome',((h?h.offsetHeight:0)+(f?f.offsetHeight:0))+'px'); }
+addEventListener('resize',chrome); chrome();
 /* Tabs */
 const TABS=['home','day2day'];
 function route(){ const t=TABS.includes(location.hash.slice(1))?location.hash.slice(1):'home';
