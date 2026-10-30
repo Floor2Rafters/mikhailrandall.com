@@ -51,7 +51,7 @@ h2{font-weight:800;font-size:22px;margin-top:40px}
 p{max-width:65ch}
 
 /* HOME: slideshow */
-.stage{position:relative;background:var(--stage);color:var(--on-stage);min-height:min(78vh,760px);overflow:hidden;display:grid}
+.stage{position:relative;background:var(--stage);color:var(--on-stage);width:100%;aspect-ratio:3/2;max-height:82vh;overflow:hidden;display:grid}
 .slide{grid-area:1/1;position:relative;opacity:0;transition:opacity 1.2s ease;display:grid;place-items:center}
 .slide.on{opacity:1}
 .slide img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
@@ -67,8 +67,8 @@ p{max-width:65ch}
 .ctl{display:flex;gap:8px;align-items:center}
 .ctl button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,241,234,.35);background:rgba(6,11,21,.35);color:var(--on-stage);font:600 16px/1 var(--body);cursor:pointer}
 .ctl button:hover{background:rgba(243,241,234,.15)}
-.dots{z-index:2;position:absolute;top:16px;right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:6px}
-.dots i{width:22px;height:3px;border-radius:2px;background:rgba(243,241,234,.3)}
+.dots{z-index:2;position:absolute;top:12px;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:flex-end;gap:4px}
+.dots i{flex:0 1 22px;min-width:4px;height:3px;border-radius:2px;background:rgba(243,241,234,.3)}
 .dots i.on{background:#E2C46A}
 .home-note{max-width:1100px;margin:0 auto;padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));color:var(--ink);font:500 18px/1.4 var(--body)}
 
@@ -140,8 +140,27 @@ footer div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16p
 <footer><div><span>© 2026 Randall Holdings LLC</span><span>Indianapolis, Indiana</span></div></footer>
 
 <script>
-/* Photos: add {src:"photos/name.jpg", cap:"Caption"} entries here. Until real photos are added, labeled placeholders show. */
-const PHOTOS=[];
+/* Photos live in photos/. Order is shuffled on every visit. */
+const PHOTOS=[
+  {src:"photos/01.jpg",alt:"A tabby cat and a small black dog on a couch"},
+  {src:"photos/02.jpg",alt:"A couple smiling in a sunny beer garden"},
+  {src:"photos/03.jpg",alt:"A couple on a dock at sunset"},
+  {src:"photos/04.jpg",alt:"A selfie by the water on a cloudy day"},
+  {src:"photos/05.jpg",alt:"A man in his kitchen holding a small dog"},
+  {src:"photos/06.jpg",alt:"A late-night selfie"},
+  {src:"photos/07.jpg",alt:"Dancing by the Christmas tree"},
+  {src:"photos/08.jpg",alt:"A kiss on the cheek on the couch"},
+  {src:"photos/09.jpg",alt:"Holding a baby at a restaurant booth"},
+  {src:"photos/10.jpg",alt:"A selfie under palm trees by the water"},
+  {src:"photos/11.jpg",alt:"Smiling with a gray cat"},
+  {src:"photos/12.jpg",alt:"At the blackjack table"},
+  {src:"photos/13.jpg",alt:"Family together at a holiday party"},
+  {src:"photos/14.jpg",alt:"Bowling night"},
+  {src:"photos/15.jpg",alt:"Hugging the Christmas tree"},
+  {src:"photos/16.jpg",alt:"A smile under a green beanie"}
+];
+/* Random order every visit */
+for(let i=PHOTOS.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [PHOTOS[i],PHOTOS[j]]=[PHOTOS[j],PHOTOS[i]]; }
 const PLACEHOLDERS=[
   {g:"linear-gradient(135deg,#1C3260,#0B1424)",cap:"Photo 1 · add your first favorite"},
   {g:"linear-gradient(135deg,#5B4A1A,#13284A)",cap:"Photo 2 · add your next one"},
@@ -151,7 +170,7 @@ const slides=PHOTOS.length?PHOTOS:PLACEHOLDERS;
 const stage=document.getElementById('stage'), dots=document.getElementById('dots'), cap=null;
 slides.forEach((s,i)=>{
   const d=document.createElement('div'); d.className='slide'+(i?'':' on'); d.setAttribute('aria-roledescription','slide');
-  if(s.src){ const im=new Image(); im.src=s.src; im.alt=s.cap||''; im.loading=i?'lazy':'eager'; d.appendChild(im); }
+  if(s.src){ const im=new Image(); im.src=s.src; im.alt=s.alt||''; im.loading=i?'lazy':'eager'; d.appendChild(im); }
   else { const p=document.createElement('div'); p.className='ph'; p.style.setProperty('--g',s.g); const b=document.createElement('b'); b.textContent='Example slide'; p.appendChild(b); d.appendChild(p); }
   stage.insertBefore(d,stage.querySelector('.over'));
   dots.appendChild(document.createElement('i'));
