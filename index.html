@@ -64,6 +64,7 @@ p{max-width:65ch}
 .slide.on{opacity:1}
 .slide img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
 .slide img.fill{object-fit:cover;filter:blur(28px) brightness(.45) saturate(1.1);transform:scale(1.15)}
+@media (max-width:700px){.stage{height:auto;min-height:0;aspect-ratio:3/2}.slide img{object-fit:cover}.slide img.fill{display:none}}
 .slide .ph{position:absolute;inset:0;background:var(--g)}
 .slide .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 55%)}
 .slide .ph b{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.65;text-align:center}
