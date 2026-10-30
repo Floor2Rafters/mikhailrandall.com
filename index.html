@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Mikhail Randall, Indianapolis, Indiana.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Mikhail Randall</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800;125,900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one name, four tabs. Home is a full-bleed photo slideshow; the rest are calm reading pages. Navy + brass, Indy colors without a logo. */
+:root{
+  --bg:#F6F7F9; --surface:#FFFFFF; --ink:#0E1A2B; --muted:#5A6577; --line:#DDE2EA;
+  --brass:#A8841E; --navy:#13284A; --stage:#0B1424; --on-stage:#F3F1EA;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1220; --surface:#121B2C; --ink:#E9ECF2; --muted:#9AA6B8; --line:#24314A;
+  --brass:#D4AE45; --navy:#9DB6E0; --stage:#060B15; --on-stage:#F3F1EA; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1220; --surface:#121B2C; --ink:#E9ECF2; --muted:#9AA6B8; --line:#24314A;
+  --brass:#D4AE45; --navy:#9DB6E0; --stage:#060B15; --on-stage:#F3F1EA; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:4px}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+.bar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mark{font:900 19px/1 var(--display);font-stretch:125%;letter-spacing:.01em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
+.mark span{color:var(--brass)}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font:600 14px/1 var(--body);text-decoration:none;color:var(--muted);padding:9px 12px;border-radius:999px}
+nav a[aria-current="page"]{color:var(--ink);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+nav a.lock::after{content:" 🔒";font-size:11px}
+
+.page{max-width:760px;margin:0 auto;padding-block:48px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brass)}
+h1,h2{font-family:var(--display);font-stretch:112%;text-wrap:balance;margin:0}
+h1{font-weight:800;font-size:clamp(34px,6vw,54px);line-height:1.02;margin-top:12px}
+h2{font-weight:800;font-size:22px;margin-top:40px}
+.lede{font-size:19px;color:var(--muted);max-width:60ch;margin-top:16px}
+p{max-width:65ch}
+
+/* HOME: slideshow */
+.stage{position:relative;background:var(--stage);color:var(--on-stage);min-height:min(78vh,760px);overflow:hidden;display:grid}
+.slide{grid-area:1/1;position:relative;opacity:0;transition:opacity 1.2s ease;display:grid;place-items:center}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.slide .ph{position:absolute;inset:0;background:var(--g)}
+.slide .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.10),transparent 55%)}
+.slide .ph b{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font:500 12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;opacity:.65;text-align:center}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,11,21,.15) 30%,rgba(6,11,21,.82));pointer-events:none}
+.over{position:absolute;left:0;right:0;bottom:0;padding-block:28px 26px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.who{min-width:0}
+.who .eyebrow{color:#E2C46A}
+.who h1{color:var(--on-stage);font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(38px,9vw,92px);line-height:.92;margin-top:10px}
+.cap{margin-top:12px;font-size:15px;color:rgba(243,241,234,.86);min-height:1.6em}
+.ctl{display:flex;gap:8px;align-items:center}
+.ctl button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,241,234,.35);background:rgba(6,11,21,.35);color:var(--on-stage);font:600 16px/1 var(--body);cursor:pointer}
+.ctl button:hover{background:rgba(243,241,234,.15)}
+.dots{position:absolute;top:16px;right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:6px}
+.dots i{width:22px;height:3px;border-radius:2px;background:rgba(243,241,234,.3)}
+.dots i.on{background:#E2C46A}
+.home-note{max-width:1100px;margin:0 auto;padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));color:var(--ink);font:500 18px/1.4 var(--body)}
+
+/* RESUME: service-record style timeline */
+.rec{margin-top:20px;border-left:2px solid var(--line);padding-left:20px;display:grid;gap:22px}
+.row{position:relative}
+.row::before{content:"";position:absolute;left:-27px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--brass)}
+.when{font:500 12px/1 var(--mono);letter-spacing:.06em;color:var(--brass);font-variant-numeric:tabular-nums}
+.row h3{font:800 18px/1.25 var(--display);font-stretch:112%;margin:6px 0 2px}
+.row .org{color:var(--muted);font-size:15px}
+.row p{margin:6px 0 0}
+.todo{color:var(--brass);font-family:var(--mono);font-size:13px}
+
+/* DAY2DAY gate */
+.gate{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;max-width:440px}
+.gate label{font-weight:600;font-size:14px}
+.gate .in{display:flex;gap:8px;margin-top:10px}
+.gate input{flex:1;min-width:0;font:600 18px/1 var(--mono);letter-spacing:.2em;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.btn{font:700 15px/1 var(--body);padding:13px 18px;border-radius:10px;border:0;background:var(--navy);color:var(--bg);cursor:pointer;text-decoration:none;display:inline-block}
+.msg{margin-top:10px;font-size:14px;min-height:1.4em;color:var(--muted)}
+.msg.bad{color:#C2412D}
+.open{margin-top:6px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;max-width:1100px;margin:0 auto;padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+</style>
+
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="mark" href="#home">Mikhail <span>Randall</span></a>
+  <nav aria-label="Site">
+    <a href="#home" data-tab="home">Home</a>
+    <a href="#resume" data-tab="resume">Resume</a>
+    <a href="#day2day" data-tab="day2day" class="lock">Day2Day</a>
+  </nav>
+</div></header>
+
+<main>
+<section id="v-home" data-view="home">
+  <div class="stage" id="stage" aria-roledescription="carousel" aria-label="My people">
+    <div class="dots" id="dots"></div>
+    <div class="shade"></div>
+    <div class="over">
+      <div class="who">
+        <div class="eyebrow">Indianapolis, Indiana</div>
+        <h1>Mikhail<br>Randall</h1>
+        <div class="cap" id="cap" aria-live="polite"></div>
+      </div>
+      <div class="ctl">
+        <button type="button" id="prev" aria-label="Previous photo">‹</button>
+        <button type="button" id="play" aria-label="Pause slideshow">❚❚</button>
+        <button type="button" id="next" aria-label="Next photo">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="home-note">If you’re reading this, I love you.</div>
+</section>
+
+
+<section id="v-resume" data-view="resume" class="page" hidden>
+  <div class="eyebrow">Resume</div>
+  <h1>Service record</h1>
+  <p class="lede">Leading people since 2013.</p>
+  <div class="rec">
+    <div class="row"><div class="when">OCT 2026 – NOW</div><h3>Assistant Manager</h3><div class="org">Upland Brewing Co. · Fountain Square, Indianapolis</div></div>
+    <div class="row"><div class="when"><span class="todo">[start]</span> – OCT 2026</div><h3>General Manager</h3><div class="org">Sangrita Grill + Cantina · Fishers, IN</div><p>Ran a full-service, sit-down restaurant with a team of 25 to 50 people.</p></div>
+    <div class="row"><div class="when">OCT 2026</div><h3>Founder</h3><div class="org">Randall Holdings LLC</div></div>
+    <div class="row"><div class="when">2013 – 2019</div><h3>11B Infantryman, E-3</h3><div class="org">Army National Guard</div></div>
+    <div class="row"><div class="when">2014 – 2016</div><h3>Entrepreneurship coursework</h3><div class="org">Ivy Tech Community College</div></div>
+    <div class="row"><div class="when">2013</div><h3>Graduate</h3><div class="org">Ben Davis High School</div></div>
+  </div>
+</section>
+
+<section id="v-day2day" data-view="day2day" class="page" hidden>
+  <div class="eyebrow">Private</div>
+  <h1>Day2Day</h1>
+  <p class="lede">My personal HQ. Enter the code to get in.</p>
+  <form class="gate" id="gate" autocomplete="off">
+    <label for="code">Code</label>
+    <div class="in"><input id="code" type="password" inputmode="text" autocomplete="off"><button class="btn" type="submit">Enter</button></div>
+    <div class="msg" id="msg"></div>
+    <div class="open" id="open" hidden><a class="btn" href="https://claude.ai/artifact/G3gHqZaFAp7VwXnGyJQLPS" target="_blank" rel="noopener">Open Day2Day →</a></div>
+  </form>
+</section>
+</main>
+
+<footer><div><span>© 2026 Randall Holdings LLC</span><span>Indianapolis, Indiana</span></div></footer>
+
+<script>
+/* Photos: add {src:"photos/name.jpg", cap:"Caption"} entries here. Until real photos are added, labeled placeholders show. */
+const PHOTOS=[];
+const PLACEHOLDERS=[
+  {g:"linear-gradient(135deg,#1C3260,#0B1424)",cap:"Photo 1 · add your first favorite"},
+  {g:"linear-gradient(135deg,#5B4A1A,#13284A)",cap:"Photo 2 · add your next one"},
+  {g:"linear-gradient(135deg,#243B2E,#0B1424)",cap:"Photo 3 · and the next"}
+];
+const slides=PHOTOS.length?PHOTOS:PLACEHOLDERS;
+const stage=document.getElementById('stage'), dots=document.getElementById('dots'), cap=document.getElementById('cap');
+slides.forEach((s,i)=>{
+  const d=document.createElement('div'); d.className='slide'+(i?'':' on'); d.setAttribute('aria-roledescription','slide');
+  if(s.src){ const im=new Image(); im.src=s.src; im.alt=s.cap||''; im.loading=i?'lazy':'eager'; d.appendChild(im); }
+  else { const p=document.createElement('div'); p.className='ph'; p.style.setProperty('--g',s.g); const b=document.createElement('b'); b.textContent='Example slide'; p.appendChild(b); d.appendChild(p); }
+  stage.insertBefore(d,stage.querySelector('.shade'));
+  dots.appendChild(document.createElement('i'));
+});
+let cur=0, timer=null, playing=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+function show(n){ const els=stage.querySelectorAll('.slide'); cur=(n+els.length)%els.length;
+  els.forEach((e,i)=>e.classList.toggle('on',i===cur)); dots.querySelectorAll('i').forEach((e,i)=>e.classList.toggle('on',i===cur));
+  cap.textContent=slides[cur].cap||''; }
+function tick(){ clearInterval(timer); if(playing) timer=setInterval(()=>show(cur+1),5000);
+  const b=document.getElementById('play'); b.textContent=playing?'❚❚':'▶'; b.setAttribute('aria-label',playing?'Pause slideshow':'Play slideshow'); }
+document.getElementById('prev').onclick=()=>{ show(cur-1); tick(); };
+document.getElementById('next').onclick=()=>{ show(cur+1); tick(); };
+document.getElementById('play').onclick=()=>{ playing=!playing; tick(); };
+let sx=null; stage.addEventListener('touchstart',e=>{ sx=e.touches[0].clientX; },{passive:true});
+stage.addEventListener('touchend',e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40){ show(cur+(dx<0?1:-1)); tick(); } sx=null; });
+show(0); tick();
+
+/* Tabs */
+const TABS=['home','resume','day2day'];
+function route(){ const t=TABS.includes(location.hash.slice(1))?location.hash.slice(1):'home';
+  document.querySelectorAll('[data-view]').forEach(v=>v.hidden=v.dataset.view!==t);
+  document.querySelectorAll('nav a').forEach(a=>{ if(a.dataset.tab===t) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  window.scrollTo(0,0); }
+addEventListener('hashchange',route); route();
+
+/* Day2Day code. The real lock is the Claude login: the app only opens for Kail's account. */
+const CODE_HASH='c80e2b15f79a9ccbedba7e69fefe84d48076265c0189858b8b826a012610d2b8';
+async function sha(s){ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
+function unlock(){ document.getElementById('open').hidden=false; const m=document.getElementById('msg'); m.className='msg'; m.textContent='Unlocked.'; }
+try{ if(sessionStorage.getItem('d2d')==='1') unlock(); }catch(_){}
+document.getElementById('gate').addEventListener('submit',async e=>{ e.preventDefault();
+  const v=document.getElementById('code').value.trim(), m=document.getElementById('msg');
+  if(!v){ m.className='msg bad'; m.textContent='Type the code first.'; return; }
+  if(await sha(v)===CODE_HASH){ unlock(); try{ sessionStorage.setItem('d2d','1'); }catch(_){} }
+  else { m.className='msg bad'; m.textContent='That code didn’t match. Try again.'; document.getElementById('open').hidden=true; } });
+</script>
+
+</body>
+</html>
