@@ -217,12 +217,12 @@ function route(){ const t=TABS.includes(location.hash.slice(1))?location.hash.sl
 addEventListener('hashchange',route); route();
 
 /* Day2Day code. The real lock is the Claude login: the app only opens for Kail's account. */
-const CODE_HASH='c80e2b15f79a9ccbedba7e69fefe84d48076265c0189858b8b826a012610d2b8';
+const CODE_HASH='19a0098e641d4bee278bb5d470d06679ffc5fdc818c3a1c52bfb7f8cde3752d3';
 async function sha(s){ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''); }
 function unlock(){ document.getElementById('open').hidden=false; const m=document.getElementById('msg'); m.className='msg'; m.textContent='Unlocked.'; }
 try{ if(sessionStorage.getItem('d2d')==='1') unlock(); }catch(_){}
 document.getElementById('gate').addEventListener('submit',async e=>{ e.preventDefault();
-  const v=document.getElementById('code').value.trim(), m=document.getElementById('msg');
+  const v=document.getElementById('code').value.trim().toLowerCase(), m=document.getElementById('msg');
   if(!v){ m.className='msg bad'; m.textContent='Type the code first.'; return; }
   if(await sha(v)===CODE_HASH){ unlock(); try{ sessionStorage.setItem('d2d','1'); }catch(_){} }
   else { m.className='msg bad'; m.textContent='That code didn’t match. Try again.'; document.getElementById('open').hidden=true; } });
